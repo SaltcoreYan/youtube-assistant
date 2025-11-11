@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube汇率转换器",
+  "version": "1.0",
+  "description": "YouTube汇率转换器",
+  "icons": {
+    "128": "icons/icon128.png"
+  },
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabs"
+  ],
+  "host_permissions": [
+    "http://localhost:8080/*",
+    "https://localhost:8080/*",
+    "*://yifaer.673972.xyz/*",
+    "https://www.youtube.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.youtube.com/watch*"
+      ],
+      "js": [
+        "config.js",
+        "defaultRate.js",
+        "exchangeRate.js",
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "YouTube汇率转换器"
+  }
+}
