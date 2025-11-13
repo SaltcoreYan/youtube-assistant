@@ -8,8 +8,7 @@
   },
   "permissions": [
     "activeTab",
-    "storage",
-    "tabs"
+    "storage"
   ],
   "host_permissions": [
     "http://localhost:8080/*",
