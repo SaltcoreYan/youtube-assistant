@@ -11,7 +11,7 @@
 - 允许在弹窗中启用或禁用转换，并查看最近一次汇率更新时间。
 
 ## 安装
-- Chrome 应用商店正在审核中，即将上架。
+- [chrome应用商店地址](https://chromewebstore.google.com/detail/nbijejcmoahflnldhgeplicafjpffnhp?utm_source=item-share-cb)
 
 ## 使用
 打开任意 YouTube 直播或回放页面，扩展会自动转换聊天室金额；通过工具栏图标进入弹窗可切换启用状态。
