@@ -110,6 +110,75 @@ function observeSuperChats() {
 
     // 处理已存在的消息
     processExistingSuperChats(itemsContainer);
+
+    // 新增：监听弹窗中的支付消息
+    observeDialogSuperChats(iframeDoc);
+}
+
+// 新增函数：监听弹窗中的支付消息
+function observeDialogSuperChats(iframeDoc) {
+    // 创建观察器监听弹窗的出现
+    const dialogObserver = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === 1 && node.tagName === 'TP-YT-PAPER-DIALOG') {
+                    // console.log('🔍 检测到弹窗出现');
+                    processDialogSuperChats(node);
+                    // 监听弹窗内部的变化
+                    watchDialogContent(node);
+                }
+            });
+        });
+    });
+
+    // 监听 iframe 文档的 body
+    dialogObserver.observe(iframeDoc.body, {
+        childList: true,
+        subtree: true
+    });
+
+    // 处理已存在的弹窗
+    const existingDialogs = iframeDoc.querySelectorAll('tp-yt-paper-dialog');
+    existingDialogs.forEach(dialog => {
+        processDialogSuperChats(dialog);
+        watchDialogContent(dialog);
+    });
+}
+
+// 新增函数：处理弹窗中的支付消息
+function processDialogSuperChats(dialogElement) {
+    const superChatInDialog = dialogElement.querySelectorAll('yt-live-chat-paid-message-renderer');
+    // console.log(`弹窗中找到 ${superChatInDialog.length} 条 Super Chat 消息`);
+    superChatInDialog.forEach(message => {
+        extractSuperChatAmount(message);
+    });
+
+    const superStickerInDialog = dialogElement.querySelectorAll('yt-live-chat-paid-sticker-renderer');
+    superStickerInDialog.forEach(message => {
+        extractSuperStickerAmount(message);
+    });
+}
+
+// 新增函数：监听弹窗内容的动态变化
+function watchDialogContent(dialogElement) {
+    const contentObserver = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+            mutation.addedNodes.forEach(node => {
+                if (node.nodeType === 1) {
+                    if (node.tagName === 'YT-LIVE-CHAT-PAID-MESSAGE-RENDERER') {
+                        extractSuperChatAmount(node);
+                    } else if (node.tagName === 'YT-LIVE-CHAT-PAID-STICKER-RENDERER') {
+                        extractSuperStickerAmount(node);
+                    }
+                }
+            });
+        });
+    });
+
+    contentObserver.observe(dialogElement, {
+        childList: true,
+        subtree: true
+    });
 }
 
 // 提取支付金额的函数 (Super Chat)

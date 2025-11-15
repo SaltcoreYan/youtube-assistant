@@ -4,6 +4,8 @@ const DEFAULT_RATES_UPDATETIME = '2025-11-10 08:00:01'
 // 默认的汇率 (相对于人民币 CNY)  共享的常量
 const DEFAULT_RATES = {
     // 简写别名
+    "JP": 21.57,       // 日元
+    "AU": 0.216,       // 澳大利亚元
     "NT" : 4.35,       // 新台币 (TWD简写)
     "US" : 0.14,       // 美元 (USD简写)
     "HK" : 1.09,       // 港币 (HKD简写)
