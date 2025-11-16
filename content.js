@@ -5,9 +5,9 @@ class YouTubeAssistant {
   constructor() {
     // 配置项
     this.CONFIG = {
-      MAX_RETRY: 10, // 最大重试次数
+      MAX_RETRY: 100, // 最大重试次数
       BASE_RETRY_DELAY: 2000, // 基础重试延迟（毫秒）
-      MAX_RETRY_DELAY: 60000, // 最大重试延迟（毫秒）
+      MAX_RETRY_DELAY: 600000, // 最大重试延迟（毫秒）
       OBSERVER_CONFIG: { childList: true, subtree: false }, // 主聊天区观察配置
       DIALOG_OBSERVER_CONFIG: { childList: true, subtree: true } // 弹窗观察配置（需要深度监听）
     };
